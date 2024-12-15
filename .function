@@ -1,0 +1,67 @@
+//Functional Interface - SAM
+interface FunctionalInterface1
+{
+	public void sayHello();
+}
+interface FunctionalInterface2
+{
+	public void add(int x,int y);
+}
+interface DiscountCalculator
+{
+	public void calculateDiscount(int price,int qty);
+}
+interface Banking 
+{
+	public void provideDiscount(int price1,int qty1,DiscountCalculator disc);
+}
+public class FunctionalInterfaceSample {
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		//LAMBDA EXPRESSION implemented using ARROW FUNCTION
+		FunctionalInterface2 fint2 = (int a,int b) -> {
+			int result = a + b;
+			System.out.println("The Result is "+result);
+		};
+		fint2.add(1000, 2000);
+		/*	FunctionalInterface1 fint1 = () -> {
+		
+		System.out.println("Welcome to Functional Programming...");
+		System.out.println("Functional Interfaces are those which has SAM");
+		System.out.println("Lambda Expr enable us to implemenet SAM");
+		System.out.println("Lambda Expr uses Arrow funtions to hold ref of method");
+	};
+		fint1.sayHello();*/
+		//Implementation1
+		DiscountCalculator disc1 = (int pricea,int qtya) -> {
+			int purchaseValue = pricea * qtya;
+			double discount = (0.1)*purchaseValue;
+			double dicountedPurchValue = purchaseValue - discount;
+			System.out.println("Original Purchase Value is "+purchaseValue);
+			System.out.println("Discount is "+discount);
+			System.out.println("Final Purchase Value is "+dicountedPurchValue);
+		};
+		//Implementation2
+		DiscountCalculator disc2 = (int pricea,int qtya) -> {
+			int purchaseValue = pricea * qtya;
+			double discount = (0.2)*purchaseValue;
+			double dicountedPurchValue = purchaseValue - discount;
+			System.out.println("Original Purchase Value is "+purchaseValue);
+			System.out.println("Discount is "+discount);
+			System.out.println("Final Purchase Value is "+dicountedPurchValue);
+		};
+		
+		Banking sbi = (int origPrice,int origQty,DiscountCalculator discc)-> { 
+			
+			discc.calculateDiscount(origPrice, origQty);
+		};
+		
+		sbi.provideDiscount(10000, 10, disc1);
+		
+		sbi.provideDiscount(10000, 10, disc2);
+
+	}
+
+}
+
+
